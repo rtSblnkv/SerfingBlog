@@ -13,7 +13,7 @@ namespace SurfingBlogRt.DAL
             initializeRoles(context);
             initializeAnnoucementTypes(context);
             initializeSystemUsers(context);
-            initializeTestAnnouncement(context);
+            initializeTestAnnouncements(context);
         }
 
         public static void initializeSystemUsers(DataContext context)
@@ -86,7 +86,7 @@ namespace SurfingBlogRt.DAL
 
         public static void initializeTestAnnouncements(DataContext context)
         {
-            context.Announcements.AddRange(DataGenerator.generateAnnouncements(100, context));
+            context.Announcements.AddRange(DataGenerator.generateAnnouncements(30, context));
             context.SaveChanges();
         }
 

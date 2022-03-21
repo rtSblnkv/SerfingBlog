@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurfingBlogRt.Models
 {
-    [Table("Application ")]
+    [Table("Application")]
     public class Application
     {
         [Key]

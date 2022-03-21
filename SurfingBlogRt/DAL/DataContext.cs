@@ -29,9 +29,14 @@ namespace SurfingBlogRt.DAL
                 .Include(u => u.Role)
                 .Where(u => u.Role.RoleName.Equals("Company"));
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=internshipsBlog;Username=postgres;Password=postgres");
+            //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=internshipsBlog;Username=postgres;Password=postgres");
+
+            optionsBuilder.UseMySql("Server=MYSQL5030.site4now.net;Database=db_a84332_studdb;Uid=a84332_studdb;Pwd=a02se03sa",
+                new MySqlServerVersion(new Version(8, 0, 11))
+                );
         }
     }
 }
