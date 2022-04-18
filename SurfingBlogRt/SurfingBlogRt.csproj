@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.24">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -22,12 +22,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\Uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\img\Uploads\4458ac7e-941b-4195-9f42-d612b49a8e35.jpg" />
-    <None Include="wwwroot\img\Uploads\45b83a91-5eaa-4ada-be0c-21b72e1d02c2.jpg" />
-    <None Include="wwwroot\img\Uploads\b31cb797-78bb-4474-90a4-30f9a42fd629.jpg" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
-﻿@model SurfingBlogRt.Models.Announcement
-@using System.Security.Claims;
+﻿@model SurfingBlogRt.Models.Vacancy
 
 @{
     ViewData["Title"] = Model.Name;
@@ -7,45 +6,38 @@
 
 <h1>@Model.Name</h1>
 
-@if (User.IsInRole("Company") && User.Claims.First(claim => claim.Type.Equals(ClaimTypes.NameIdentifier)).Value.Equals(Model.CompanyId.ToString()))
-{
-<div class="manage_buttons">
-    <a asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
+<div>
+    <div>@Model.Name</div>
+    <div>@Model.Company</div>
+    <div>
+        <h2>Требования:</h2>
+        <div>
+            @Model.Obeys
+        </div>
+    </div>
+    <div>
+        <h2>Требования:</h2>
+        <div>
+            @Model.Requirements
+        </div>
+    </div>
+    <div>
+        <h2>Условия:</h2>
+        <div>
+            @Model.Conditions
+        </div>
+    </div>
+    <div>
+        <h2>Контактная информация</h2>
+        <div>
+            <p>@Model.Address</p>
+            <p>@Model.Phone</p>
+            <p>@Model.Email</p>
+        </div>
+    </div>
+</div>
 
-    <a asp-action="Delete" asp-route-id="@Model.Id">Удалить</a>
-</div>
-}
-<div class="card">
-    <div class="name">
-        <h2>@Model.Name</h2>
-    </div>
-    <div class="specialization">
-        <h3>@Model.Theme</h3>
-    </div>
-    <div class="company">
-        <p>@Model.Company.Nickname</p>
-    </div>
-    <div class="company_email">
-        <p>@Model.Company.Email</p>
-    </div>
-    <div class="location">
-        <h3>@Model.Location</h3>
-    </div>
-    <div class="date">
-        <p>@Model.StartDateLabel</p>
-    </div>
-    <div class="org_type">
-        <p>@Model.Format</p>
-    </div>
-    <div class="duration">
-        <p>@Model.DurationInDays</p>
-    </div>
-    <div class="description">
-        <p>@Model.Description</p>
-    </div>
-</div>
-@if (User.IsInRole("User"))
-{
-    <a asp-action="Create" asp-controller="Applications" asp-route-id="@Model.Id">Оставить заявку</a>
-}
-<a asp-action="Show" asp-route-type="@Model.Type.TypeName">Назад</a>
+
+
+
+

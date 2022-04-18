@@ -1,110 +1,224 @@
-﻿@model IEnumerable<SurfingBlogRt.Models.Announcement>
+﻿@model IEnumerable<SurfingBlogRt.Models.Vacancy>
 
 @{
-    ViewData["Title"] = "Страница эвентов";
+    ViewData["Title"] = "Поиск вакансий";
 }
 
-<div class="filters">
-    <div class="input-field col s12">
-        <select id="filter_theme" asp-items="ViewBag.Themes">
-            <option selected value="Любой">Любой</option>
-        </select>
-        <label>Тема</label>
+<a class="top_button" onclick="topFunction()" id="myBtn">
+    <img src="~/img/top_button.png" class="top">
+</a>
+<div class="searchVac">
+    <input type="text" placeholder="Поиск">
+    <a href="search.html" onclick="search.html">
+        <img src="~/img/searching.png">
+    </a>
+</div>
+
+<div class="base">
+    <div class="filtres">
+        <p>Занятость:</p>
+        <div class="busyness">
+            <label>
+                <input type="checkbox" name="full" class="real-checkbox">
+                <span class="custom-checkbox"></span> Полная занятость
+            </label>
+            <label>
+                <input type="checkbox" name="part" class="real-checkbox">
+                <span class="custom-checkbox"></span> Частичная занятость
+            </label>
+            <label>
+                <input type="checkbox" name="internship" class="real-checkbox">
+                <span class="custom-checkbox"></span> Стажировка
+            </label>
+            <label>
+                <input type="checkbox" name="others" class="real-checkbox">
+                <span class="custom-checkbox"></span> Другое
+            </label>
+        </div>
+        <p>Зарплата:</p>
+        <div class="salary">
+            <label>
+                <input type="radio" name="sal" value="not-important" class="real-radio">
+                <span class="custom-radio"></span> Не имеет значения
+            </label>
+            <label>
+                <input type="radio" name="sal" value="none" class="real-radio">
+                <span class="custom-radio"></span> От 15 000 руб.
+            </label>
+            <label>
+                <input type="radio" name="sal" value="1-3years" class="real-radio">
+                <span class="custom-radio"></span> От 30 000 руб.
+            </label>
+            <label>
+                <input type="radio" name="sal" value="3-6years" class="real-radio">
+                <span class="custom-radio"></span> От 45 000 руб.
+            </label>
+            <label>
+                <input type="radio" name="sal" value="6years-more" class="real-radio">
+                <span class="custom-radio"></span> От 60 000 руб.
+            </label>
+            <label>
+                <input type="radio" name="sal" value="6years-more" class="real-radio">
+                <span class="custom-radio"></span> От 75 000 руб.
+            </label>
+        </div>
+        <p>Месторасположение:</p>
+        <div class="region">
+            <label>
+                <input type="checkbox" name="samara" class="real-checkbox">
+                <span class="custom-checkbox"></span> Самара
+            </label>
+            <label>
+                <input type="checkbox" name="syzran" class="real-checkbox">
+                <span class="custom-checkbox"></span> Сызрань
+            </label>
+            <label>
+                <input type="checkbox" name="tolyatti" class="real-checkbox">
+                <span class="custom-checkbox"></span> Тольятти
+            </label>
+            <label>
+                <input type="checkbox" name="others" class="real-checkbox">
+                <span class="custom-checkbox"></span> Другое
+            </label>
+        </div>
+        <p>Опыт работы:</p>
+        <div class="expirience">
+            <label>
+                <input type="radio" name="exp" value="not-important" class="real-radio">
+                <span class="custom-radio"></span> Не имеет значения
+            </label>
+            <label>
+                <input type="radio" name="exp" value="none" class="real-radio">
+                <span class="custom-radio"></span> Нет опыта
+            </label>
+            <label>
+                <input type="radio" name="exp" value="1-3years" class="real-radio">
+                <span class="custom-radio"></span> От 1 года до 3 лет
+            </label>
+            <label>
+                <input type="radio" name="exp" value="3-6years" class="real-radio">
+                <span class="custom-radio"></span> От 3 лет до 6 лет
+            </label>
+            <label>
+                <input type="radio" name="exp" value="6years-more" class="real-radio">
+                <span class="custom-radio"></span> Более 6 лет
+            </label>
+        </div>
     </div>
-    <div class="input-field col s12">
-        <select id="filter_location" asp-items="ViewBag.Locations">
-            <option selected value="Любой">Любой</option>
-        </select>
-        <label>Локация</label>
+    <div class="vacancies">
+        <div class="blocks">
+            @Html.Partial("Items")
+        </div>
     </div>
-    <button class="filter_button">Найти</button>
-    <button class="clear_button">Очистить</button>
-</div>
-<div class="button_find">
-    <form сlass="search">
-        <input class="search_input" type="text" placeholder="Поиск" />
-        <button  disabled  class="search_button">Поиск</button>
-    </form>
 </div>
 
-<div class="blocks">
-    @Html.Partial("Items")
-</div>
 
-<div id="loading"><img src='@Url.Content("~/content/spinning-loading.gif")'></div>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/filter.js"></script>
-<script type="text/javascript">
-    $(function () {
-
-        $('div#loading').hide();
-
-        var page = 0;
-
-        // обработка события скроллинга
-        $(window).scroll(function () {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                loadItems();
-            }
-        });
-
-        function clearBlocks() {
-            $(".block").each(function () {
-                this.remove();
-            });
-        }
-
-        function reload() {
-            clearBlocks();
-            loadItems();
-        }
-
-        document.getElementById('filter_theme').addEventListener('change', function () {
-            page = -1;
-            reload();
-        });
-
-        document.getElementById('filter_location').addEventListener('change', function () {
-            page = -1;
-            reload();
-        });
-
-        var _inCallback = false;
-        function loadItems() {
-            if (page > -2 && !_inCallback) {
-                _inCallback = true;
-                $('div#loading').show();
-                page++;
-                var url_ = '/Announcements/Show/' + page + '?type=@ViewBag.Type';
-
-                var format = $("#filter_theme option:selected").text();
-                if (format != "Любой") {
-                    url_ = url_ + '&theme=' + format;
-                }
-
-                var language = $("#filter_location option:selected").text();
-                if (language != "Любой") {
-                    url_ = url_ + '&location=' + language;
-                }
-
-                $.ajax({
-                    type: 'GET',
-                    url: url_ ,
-                    success: function (data, textstatus) {
-                        if (data != '') {
-                            console.log(data);
-                            $(".blocks").append(data);
+        <script src="js/scriptForButtonTop.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", initAll1);
+            window.addEventListener("load", initAll2);
+            var xhr1 = false, x, allSubs, elements, ps;
+            function initAll1() {
+                elements = document.querySelectorAll(".name-place");
+                for (let i = 0; i < elements.length; i++)
+                    elements[i].onclick = displayTitle;
+                if (window.XMLHttpRequest)
+                    xhr1 = new XMLHttpRequest();
+                else {
+                    if (window.ActiveXObject) {
+                        try {
+                            xhr1 = new ActiveXObject("Microsoft.XMLHTTP");
                         }
-                        else {
-                            page = -2;
-                        }
-                        _inCallback = false;
-                        $("div#loading").hide();
+                        catch (e) { }
                     }
-                });
+                }
+                if (xhr1) {
+                    xhr1.onreadystatechange = setTitlesArray;
+                    xhr1.open("GET", "firmCatalog.xml", true);
+                    xhr1.send();
+                }
+                /*else
+                  alert("Error 1");*/
             }
-        }
-    })
-</script>
+            function setTitlesArray() {
+                if (xhr1.readyState == 4) {
+                    if (xhr1.status == 200) {
+                        if (xhr1.responseXML)
+                            allSubs = xhr1.responseXML.getElementsByTagName("Firm");
+                        /*else
+                          alert("Error 2 " + xhr.status);*/
+                    }
+                }
+            }
+            function displayTitle() {
+                var i = parseInt(this.getAttribute("value"));
+                document.getElementById("show" + i).innerHTML = allSubs[i - 1].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+            }
+
+            var xhr = false;
+            var subsArray = new Array();
+            function initAll2() {
+                document.getElementById("searchField").onkeyup = searchSuggest;
+                if (window.XMLHttpRequest)
+                    xhr = new XMLHttpRequest();
+                else {
+                    if (window.ActiveXObject) {
+                        try {
+                            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        catch (e) { }
+                    }
+                }
+                if (xhr) {
+                    xhr.onreadystatechange = setSubsArray;
+                    xhr.open("GET", "russia.xml", true);
+                    xhr.send(null);
+                }
+                /*else
+                    alert("Error 1");*/
+            }
+            function setSubsArray() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        if (xhr.responseXML) {
+                            var allSubs = xhr.responseXML.getElementsByTagName("subject_of_federation");
+                            for (var i = 0; i < allSubs.length; i++)
+                                subsArray[i] = allSubs[i].getElementsByTagName("name")[0].firstChild;
+                        }
+                    }
+                    /*else
+                        alert("Error 2 " + xhr.status);*/
+                }
+            }
+            function searchSuggest() {
+                var str = document.getElementById("searchField").value;
+                document.getElementById("searchField").className = "";
+                if (str != "") {
+                    document.getElementById("popups").innerHTML = "";
+                    for (var i = 0; i < subsArray.length; i++) {
+                        var thisSub = subsArray[i].nodeValue;
+                        if (thisSub.toLowerCase().indexOf(str.toLowerCase()) == 0) {
+                            var tempDiv = document.createElement("div");
+                            tempDiv.innerHTML = thisSub;
+                            tempDiv.onclick = makeChoice;
+                            tempDiv.className = "suggestions";
+                            document.getElementById("popups").appendChild(tempDiv);
+                        }
+                    }
+                    var foundCt = document.getElementById("popups").childNodes.length;
+                    if (foundCt == 0)
+                        document.getElementById("searchField").className = "error";
+                    if (foundCt == 1) {
+                        document.getElementById("searchField").value = document.getElementById("popups").firstChild.innerHTML;
+                        document.getElementById("popups").innerHTML = "";
+                    }
+                }
+            }
+            function makeChoice(evt) {
+                var thisDiv = (evt) ? evt.target : window.event.srcElement;
+                document.getElementById("searchField").value = thisDiv.innerHTML;
+                document.getElementById("popups").innerHTML = "";
+            }
+
+        </script>

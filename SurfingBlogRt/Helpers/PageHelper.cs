@@ -12,7 +12,7 @@ namespace SurfingBlogRt.Helpers
     {
         private const int pageSize = 15;
 
-        public static List<Announcement> GetItemsPage(List<Announcement> announcements, int page = 0)
+        public static List<Vacancy> GetItemsPage(List<Vacancy> announcements, int page = 0)
         {
             var itemsToSkip = page * pageSize;
 

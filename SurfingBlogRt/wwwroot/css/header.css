@@ -1,0 +1,77 @@
+header{
+  display: flex;
+  justify-content: start;
+  align-items: flex-end;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  top: 0;
+}
+.logo{
+  width: auto;
+  height: 45px;
+  padding-left: 20px;
+}
+header .search {
+  padding-left: 18px;
+  padding-bottom: 3px;
+  height: auto;
+  width: 25%;
+}
+header .search input{
+  padding-left: 6px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 10px;
+  color: #131A21;
+  appearance: none;
+  outline: none;
+}
+header .popups {
+  position: absolute;
+  z-index: 1;
+}
+.top_button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  outline: none;
+}
+.top {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+}
+header span{
+   padding-left: 700px;
+   padding-bottom: 8px;
+   font-size: 17px;
+   font-style: italic;
+}
+#popups {
+	position: absolute;
+}
+#searchField.error {
+	color: red;
+  font-style: bold;
+}
+div.suggestions {
+	background-color: white;
+	padding: 5px 50px 5px 6px;
+  font-size: 18px;
+  color: #131A21;
+	border: 1px solid black;
+  z-index: 1;
+}
+
+div.suggestions:hover {
+	font-style: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,147 @@
+@import url(https://allfont.ru/allfont.css?fonts=ubuntu);
+@import url(https://allfont.ru/allfont.css?fonts=lazurski-cyrillic);
+*{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  font-family: 'Lazurski Cyrillic', arial;
+}
+.intro{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 65vh;
+  background-image: url(../images/background.png);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid #CCCCCC;
+}
+.main_button{
+  padding: 25px;
+  background-color: #FFFFFF;
+  height: auto;
+  width: auto;
+  border-radius: 15px;
+  border: 6px solid #174449;
+  font-size: 40px;
+  font-family: 'Ubuntu', arial;
+  text-align: center;
+  font-weight: 600;
+  color: #131A21;
+}
+.main_button:hover{
+  cursor: pointer;
+  background-color: #015067;
+  color: #FFFFFF;
+}
+h1{
+  padding: 30px;
+  text-align: center;
+  font-size: 32px;
+  color: #131A21;
+}
+.article_list{
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.article{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 47%;
+  align-items:flex-start;
+  justify-content: space-around;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+.image_container{
+  margin-right: 30px;
+  position: relative;
+}
+.article_img{
+  opacity: 1;
+  width: 200px;
+  height: auto;
+  transition: .5s ease;
+  display: block;
+  backface-visibility: hidden;
+}
+.image_container a{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.text{
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 25px;
+  font-family: 'Ubuntu', arial;
+  background-color: #174449;
+  border-radius: 10px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.image_container:hover .article_img{
+  opacity: 0.6;
+}
+.image_container:hover a{
+  opacity: 1;
+}
+.article_review{
+  display: flex;
+  flex-flow: column nowrap;
+  width: auto;
+}
+.article_review a{
+  color: #131A21;
+  line-height: 30px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.article_review a:hover{
+  text-decoration: underline;
+}
+.article_review p{
+  font-size: 18px;
+  text-align: justify;
+  text-overflow: ellipsis;
+  line-height: 30px;
+  width: fill-available;
+  max-width: fill-available;
+}
+.more_button{
+  display: block;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: auto;
+  width: 30%;
+  border-radius: 10px;
+  border: 3px solid #131A21;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #131A21;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+}
+.more_button:hover{
+  cursor: pointer;
+  background-color: #015067;
+  color: #FFFFFF;
+}

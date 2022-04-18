@@ -1,0 +1,86 @@
+@import url(https://allfont.ru/allfont.css?fonts=lazurski-cyrillic);
+*{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  font-family: 'Lazurski Cyrillic', arial;
+  outline: none;
+}
+h1{
+  text-align: center;
+  margin: 15px;
+}
+.title{
+  margin-left: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.ps{
+  font-size: 14px;
+  color: #656973;
+}
+.input_field{
+  display: flex;
+  flex-flow: column nowrap;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 45%;
+  height: auto;
+}
+.field:focus{
+  box-shadow: 0 0 10px #848EA6;
+}
+.field{
+  height: 30px;
+  padding-left: 10px;
+  font-size: 19px;
+  border: 2px solid #174449;
+  border-radius: 10px;
+}
+.big_field{
+  height: 100px;
+  text-align:left;
+  padding-left: 10px;
+  font-size: 19px;
+  border: 2px solid #174449;
+  border-radius: 10px;
+  resize: vertical;
+}
+.big_field:focus{
+  box-shadow: 0 0 10px #848EA6;
+}
+._error{
+  box-shadow: 0 0 5px red;
+}
+._correctly{
+  box-shadow: 0 0 5px green;
+  background: #EEF4FE;
+}
+.span{
+  font-size: 14px;
+  color: #656973;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.post_button{
+  margin-left: 20px;
+  margin-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 60px;
+  width: 35%;
+  border-radius: 10px;
+  border: 3px solid #131A21;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  background-color: #FFFFFF;
+  color: #131A21;
+}
+.post_button:hover{
+  cursor:pointer;
+  background-color: #015067;
+  color: #FFFFFF;
+}

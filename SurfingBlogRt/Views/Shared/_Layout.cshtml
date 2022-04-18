@@ -7,110 +7,70 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Блог о стажировках для студентов</title>
+    <title>@ViewData["Title"] - WeWork</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/footer.css">
-    <link rel="stylesheet" href="~/css/about.css">
-    <link rel="stylesheet" href="~/css/info_article.css">
-    <link rel="stylesheet" href="~/css/card_page.css">
-    <link rel="stylesheet" href="~/css/site.css" />
-    <style>
-        .avatar {
-            border-radius: 80px;
-            border: 3px solid black;
-            box-shadow: 0 0 7px #666;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/header.css">
+    <link rel="stylesheet" href="~/css/article1.css">
+    <link rel="stylesheet" href="~/css/post.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm mb-3 teal lighten-2" style="background-color: #C7D2D9">
             <div class="nav-wrapper">
                 <a class="brand-logo" asp-area="" asp-controller="Home" asp-action="Index">
-                    <h1 class="header_title">StudPracticum</h1>
+                    <img src="images/logo.png" class="logo">
                 </a>
+                <form action="#">
+                    <div class="search">
+                        <input type="text" id="searchField" autocomplete="off" placeholder="Введите ваш регион"> <br />
+                        <div id="popups"> </div>
+                    </div>
+                </form>
+                <span id="time"></span>
+                <script type="text/javascript">
+                    function clock() {
+                        var d = new Date();
+                        var day = d.getDate();
+                        var hrs = d.getHours();
+                        var min = d.getMinutes();
+                        var sec = d.getSeconds();
+                        var mnt = new Array("января", "февраля", "марта", "апреля", "мая",
+                            "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря");
+                        if (day <= 9) day = "0" + day;
+                        if (hrs <= 9) hrs = "0" + hrs;
+                        if (min <= 9) min = "0" + min;
+                        if (sec <= 9) sec = "0" + sec;
+                        $("#time").html("Сейчас: " + hrs + ":" + min + ":" + sec + "&nbsp;&nbsp;&nbsp;" + day + "-го " + mnt[d.getMonth()] + " " + d.getFullYear() + " г.");
+                    }
+                    setInterval("clock()", 1000);
+                </script>
                 <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button> 
-                <ul id="nav-mobile" class="navbar-nav flex-grow-1 right hide-on-med-and-down">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="About" asp-action="About">Что это?</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Announcements" asp-action="Show" asp-route-type="Internship">Стажировки</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Announcements" asp-action="Show" asp-route-type="Hackaton">Хакатоны</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Announcements" asp-action="Show" asp-route-type="Practicum">Практикумы</a>
-                            </li>
-                            @if (!User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Register" asp-action="Index">Регистрация</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark border-0 border-secondary" asp-area="" asp-controller="Login" asp-action="Login">Войти</a>
-                                </li>
-                            }
-                            else
-                            {
-                                @if (User.IsInRole("Company"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark border-0 order-secondary" asp-area="" asp-controller="Announcements" asp-action="Create">Добавить</a>
-                                    </li>
-                                }
-                                <li class="nav-item">
-                                    <div style="float:right">
-                                        <label>@User.Identity.Name</label>
-                                    </div>
-                                    <div>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">
-                                            <img src="~/img/logoLogout.png" height="30" />
-                                        </a>
-                                    </div>
-                                </li>
-                            }
-                        </ul>                      
+                </button>
             </div>
-</nav>
+        </nav>
 
     </header>
     <div class="container">
         <main role="main">
-            @RenderBody()
+            <a class="top_button" onclick="topFunction()" id="myBtn">
+                <img src="~/img/top_button.png" class="top">
+            </a>
+             @RenderBody()
         </main>
     </div>
 
     <div id="toTop"> ^ Наверх </div>
 
-    <footer class="page-footer teal lighten-2">
-        <div class="footer-copyright">
-            <div class="container">
-                <h1>Created by Artem Sabelnikov</h1>
-                    <div class="grey-text text-lighten-4 right">
-                        <h1>© 2022 Samara University</h1>
-                    </div>
-            </div>
-        </div>
+    <footer>
+        <p>Создано Сусликовой Марией, студенткой группы 6414-020302D</p>
+        <p>2021 Все права защищены</p>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/scroll.js"></script>
-    <script src="~/js/gallery.js"></script>
-    <script src="~/js/search.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
-    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

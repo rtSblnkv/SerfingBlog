@@ -1,0 +1,92 @@
+@import url(https://allfont.ru/allfont.css?fonts=lazurski-cyrillic);
+*{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  font-family: 'Lazurski Cyrillic', arial;
+}
+h1{
+  padding-bottom: 20px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 35px;
+  color: #131A21;
+}
+.filling{
+  margin-left: 60px;
+  margin-right: 120px;
+  font-size: 19px;
+  text-align: justify;
+}
+.before_accordion{
+  margin-bottom: 12px;
+}
+.accordion{
+    background-color: #F3F3F3;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 22px;
+    transition: 0.4s;
+}
+.active, .accordion:hover{
+    background-color: #D0D0D0;
+}
+.accordion:after {
+    content: '\02795';
+    font-size: 10px;
+    color: #6E7F80;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796";
+}
+.panel{
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+p{
+  line-height: 30px;
+}
+.picture{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+ol{
+  line-height: 30px;
+  margin-top: 10px;
+  margin-left: 60px;
+}
+.back{
+  display: block;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: auto;
+  width: 30%;
+  border-radius: 10px;
+  border: 3px solid #131A21;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #131A21;
+  margin: 0 auto;
+  margin-top: 25px;
+  background-color: #FFFFFF;
+}
+.back:hover{
+  cursor: pointer;
+  background-color: #015067;
+  color: #FFFFFF;
+}

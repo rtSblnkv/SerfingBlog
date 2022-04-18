@@ -1,62 +1,63 @@
-﻿@model IEnumerable<SurfingBlogRt.Models.StatisticTableViewModel>
-@{
+﻿@{
     ViewData["Title"] = "Главная";
 }
-<div class="base_info">
-    <p>
-        Данный сайт создан для студентов и начинающих IT-разработчиков, желающих попробовать себя или набраться необходимого опыта на старте карьеры
-        Предоставляется информация о предстоящих хакатонах, наборах на стажировки или практикумы в real-time режиме.
-    </p>
-    <img src="~/img/Hack.jpeg">
-    <p> Ниже приведена количественнная информация о текущих стажировках</p>
-    <table class="statistics-info">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Theme)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Count)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var tableItem in Model)
-            {
-                <tr>
-                    <td>
-                        @tableItem.Type
-                    </td>
-                    <td>
-                        @tableItem.Theme
-                    </td>
-                    <td>
-                        @tableItem.Count
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<a class="top_button" onclick="topFunction()" id="myBtn">
+    <img src="images/top_button.png" class="top">
+</a>
+<div class="intro">
+    <button class="main_button" onclick="document.location='search.html'">Начать поиск работы</button>
+    <button class="main_button" onclick="document.location='post.html'">Выложить вакансию</button>
 </div>
-
-<script type="text/javascript">
-    function onImageUpload() {
-        if (document.getElementById("postText").value === ""
-            && document.getElementById("imageData").value === "") {
-            document.getElementById('save_button').disabled = true;
-        } else {
-            document.getElementById('save_button').disabled = false;
-        }
-
-        if (document.getElementById('imageData')
-            && document.getElementById('imageData').files
-            && document.getElementById('imageData').files[0].name !== "") {
-            document.getElementById("imageDataName").value
-                = "...\\" + document.getElementById('imageData').files[0].name;
-        }
-    }
-</script>
+<h1>Полезные статьи по поиску работы</h1>
+<div class="article_list">
+    <div class="article">
+        <div class="image_container">
+            <img src="~/img/cv.png" class="article_img">
+            <a class="brand-logo" asp-area="" asp-controller="About" asp-action="About">
+                <p class="text">Читать</p>
+            </a>
+        </div>
+        <div class="article_review">
+            <a class="brand-logo" asp-area="" asp-controller="About" asp-action="About">
+                <h2>Как правильно составить резюме: наши советы</h2>
+            </a>
+            <p>
+                Будем честны: резюме не главное при устройстве на работу. Человека с уникальными опытом и
+                компетенциями пригласят, даже если его резюме составлено на салфетке. Другое дело, если к
+                категории профессионалов он пока не относится.
+            </p>
+        </div>
+    </div>
+    <div class="article">
+        <div class="image_container">
+            <img src="~/img/search.jpg" class="article_img">
+            <a class="brand-logo" asp-area="" asp-controller="About" asp-action="About">
+                <p class="text">Читать</p>
+            </a>
+        </div>
+        <div class="article_review">
+            <a class="brand-logo" asp-area="" asp-controller="About" asp-action="About">
+                <h2>Методика поиска работы молодым человеком без опыта</h2>
+            </a>
+            <p>
+                Необходимость поиска работы – это большой психологический стресс. Особенно сложно бывшим
+                студентам, которые только что получили диплом об окончании высшего учебного заведения и ни дня
+                не работали по специальности.
+            </p>
+        </div>
+    </div>
+    <div class="article">
+        <div class="image_container">
+            <img class="article_img" id="newImg" src="images/interview.jpeg">
+            <a id="newA" href="main.html">
+                <p class="text" id="newRead">Читать</p>
+            </a>
+        </div>
+        <div class="article_review">
+            <a id="newA2" class="brand-logo" asp-area="" asp-controller="About" asp-action="About">
+                <h2 id="newH2">Рассказ о себе на собеседовании</h2>
+            </a>
+            <p id="newP">Каждый соискатель сталкивается с тем, что ему необходимо прийти на собеседование. Задача на первый взгляд проста — рассказать о себе, ответить на вопросы работодателя, но с другой стороны нужно уметь презентовать себя, рассказать те факты, которые могут приятно удивить рекрутера</p>
+        </div>
+    </div>
+</div>

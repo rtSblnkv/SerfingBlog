@@ -1,14 +1,26 @@
-﻿@model IEnumerable<SurfingBlogRt.Models.Announcement>
+﻿@model IEnumerable<SurfingBlogRt.Models.Vacancy>
 
-@foreach (Announcement post in Model)
-{
-    <div class="block">
-        <div class="block_name">@post.Name</div>
-        <div class="block_specialization">@post.Theme</div>
-        <div class="block_location">@post.Location</div>
-        <div class="block_date">@post.StartDateLabel</div>
-        <div class="go_to_page">
-            <a asp-controller="Announcements" asp-action="Details" asp-route-id="@post.Id">Посмотреть</a>
-        </div>
+    <a class="top_button" onclick="topFunction()" id="myBtn">
+        <img src="~/img/top_button.png" class="top">
+    </a>
+
+    @foreach (Vacancy post in Model)
+    {
+<div>
+    <div class="vacancy">
+        <p class="show">@post.Company</p>
+        <p>@post.Obeys</p>
     </div>
-}
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2389.161924724902!2d50.171272315833455!3d53.21494497995179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41661ebc310454d3%3A0xa4d02eaa7f928bae!2z0YPQuy4g0JPQsNGPLCA0Mywg0KHQsNC80LDRgNCwLCDQodCw0LzQsNGA0YHQutCw0Y8g0L7QsdC7LiwgNDQzMDg2!5e0!3m2!1sru!2sru!4v1636956126851!5m2!1sru!2sru" width="700" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+    <div class="go_to_page">
+        <a asp-controller="Announcements" asp-action="Details" asp-route-id="@post.Id">Посмотреть</a>
+    </div>
+</div>
+    }
+
+    <script src="js/scriptForButtonTop.js"></script>
+    <script src="js/scriptForLiveSearch.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    

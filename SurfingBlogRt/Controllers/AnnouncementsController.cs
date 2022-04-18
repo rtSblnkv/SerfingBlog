@@ -30,19 +30,14 @@ namespace SurfingBlogRt.Controllers
             ViewData["Type"] = type;
 
             int page = id ?? 0;
-            if (IsAjaxRequest())
-            {
-                return PartialView("Items", PageHelper.GetItemsPage(announcements,page));
-            }
-            else
-            {
-                ViewData["Themes"] = getThemeFilterData(type);
-                ViewData["Locations"] = getLocationFilterData(type);
-                ViewData["Formats"] = getFormatFilterData(type);
-                return View(PageHelper.GetItemsPage(announcements, page)); 
-            }           
+            //здесь данные для фильтров
+                //ViewData["Themes"] = getThemeFilterData(type);
+                //ViewData["Locations"] = getLocationFilterData(type);
+                //ViewData["Formats"] = getFormatFilterData(type);
+                return View(announcements);          
         }
 
+        //мб надо будет
         public bool IsAjaxRequest()
         {
             if (Request == null)
@@ -52,21 +47,18 @@ namespace SurfingBlogRt.Controllers
             return false;
         }
 
-        public IQueryable<Announcement> getAnnouncementsFiltered(string type, string theme, string location)
+        public IQueryable<Vacancy> getAnnouncementsFiltered(string type, string phone, string company)
         {
-            IQueryable<Announcement> filteredAnnouncementsQuery =  _context.Announcements
-                .Include(a => a.Company)
-                .Include(a => a.Type)
-                .Where(announcement => announcement.Type.TypeName.Equals(type));
+            IQueryable<Vacancy> filteredAnnouncementsQuery = null;
 
-            if(theme != null)
+            if(phone != null)
             {
-                filteredAnnouncementsQuery = filteredAnnouncementsQuery.Where(a => a.Theme.Equals(theme));
+                filteredAnnouncementsQuery = _context.Announcements.Where(a => a.Phone.Equals(phone));
             }
 
-            if(location != null)
+            if(company != null)
             {
-                filteredAnnouncementsQuery = filteredAnnouncementsQuery.Where(a => a.Location.Equals(location));
+                filteredAnnouncementsQuery = _context.Announcements.Where(a => a.Company.Equals(company));
             }
 
             return filteredAnnouncementsQuery;
@@ -81,8 +73,6 @@ namespace SurfingBlogRt.Controllers
             }
 
             var announcement = await _context.Announcements
-                .Include(a => a.Company)
-                .Include(a => a.Type)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (announcement == null)
             {
@@ -95,7 +85,6 @@ namespace SurfingBlogRt.Controllers
         // GET: Announcements/Create
         public IActionResult Create()
         {
-            ViewData["TypeIds"] = getAnnouncementTypeData();
             return View();
         }
 
@@ -104,58 +93,31 @@ namespace SurfingBlogRt.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TypeId,Description,Name,Theme,Location,Format,StartDate,LongtityInDays,CreateDate,Image")] Announcement announcement)
+        public async Task<IActionResult> Create([Bind("Id,Name,Company,Region,City,Address,Phone,Email,Obeys,Requirements,Conditions")] Vacancy announcement)
         {
             if (ModelState.IsValid)
             {
-                var companyIdString = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (!int.TryParse(companyIdString, out var companyId))
-                {
-                    return View("Create", announcement);
-                }
-
-                announcement.CompanyId = companyId;
                 _context.Add(announcement);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details),announcement);
             }
-            ViewData["TypeIds"] = getAnnouncementTypeDataEditing(announcement.TypeId);
             return View(announcement);
         }
-
-        // GET: Announcements/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var announcement = await _context.Announcements.FindAsync(id);
-            if (announcement == null)
-            {
-                return NotFound();
-            }
-            ViewData["TypeIds"] = getAnnouncementTypeDataEditing(announcement.TypeId);
-            return View(announcement);
-        }
-
+/*
         public SelectList getThemeFilterData(string type)
         {
             return new SelectList(
                 _context.Announcements
-                .Include(a => a.Type)
                 .Where(a => a.Type.TypeName.Equals(type))
                 .Select(a => a.Theme)
                 .Distinct());
         }
 
-        public SelectList getLocationFilterData(string type)
+        public SelectList getLocationFilterData(string address)
         {
             return new SelectList(
                 _context.Announcements
-                .Include(a => a.Type)
-                .Where(a => a.Type.TypeName.Equals(type))
+                .Where(a => a.Address.Equals(address))
                 .Select(a => a.Location)
                 .Distinct());
         }
@@ -179,75 +141,8 @@ namespace SurfingBlogRt.Controllers
         {
             return new SelectList(_context.AnnoucementTypes, "Id", "TypeName");
         }
-
-        // POST: Announcements/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Name,Theme,Location,Format,StartDate,LongtityInDays,CreateDate,Image")] Announcement announcement)
-        {
-            if (id != announcement.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(announcement);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AnnouncementExists(announcement.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Details), announcement);
-            }
-            ViewData["TypeIds"] = getAnnouncementTypeDataEditing(announcement.TypeId);
-            return View(announcement);
-        }
-
-        // GET: Announcements/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var announcement = await _context.Announcements
-                .Include(a => a.Company)
-                .Include(a => a.Type)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (announcement == null)
-            {
-                return NotFound();
-            }
-
-            return View(announcement);
-        }
-
-        // POST: Announcements/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var announcement = await _context.Announcements
-                .Include(a => a.Type)
-                .FirstAsync(a => a.Id == id);
-            _context.Announcements.Remove(announcement);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Show),new { type = announcement.Type.TypeName, id = 1 });
-        }
+*/
+       
 
         private bool AnnouncementExists(int id)
         {

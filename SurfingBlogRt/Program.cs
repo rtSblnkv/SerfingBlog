@@ -10,7 +10,6 @@ namespace SurfingBlogRt
         public static void Main(string[] args)
         {
             var context = new DataContext();
-            DBInitializer.Initialize(context);
             CreateHostBuilder(args).Build().Run();
         }
 
